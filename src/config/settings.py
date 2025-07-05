@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from typing import Any
 
+from pydantic import EmailStr
 from pydantic_settings import BaseSettings
 
 
@@ -46,6 +47,12 @@ class Settings(BaseAppSettings):
     SECRET_KEY_ACCESS: str = os.getenv("SECRET_KEY_ACCESS", os.urandom(32))
     SECRET_KEY_REFRESH: str = os.getenv("SECRET_KEY_REFRESH", os.urandom(32))
     JWT_SIGNING_ALGORITHM: str = os.getenv("JWT_SIGNING_ALGORITHM", "HS256")
+
+    SMTP_HOST: str = os.getenv("SMTP_HOST")
+    SMTP_PORT: int = os.getenv("SMTP_PORT")
+    SMTP_USER: str = os.getenv("SMTP_USER")
+    SMTP_PASSWORD: str = os.getenv("SMTP_PASSWORD")
+    SMTP_FROM_EMAIL: EmailStr = os.getenv("SMTP_FROM_EMAIL")
 
 
 class TestingSettings(BaseAppSettings):
