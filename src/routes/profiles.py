@@ -6,6 +6,7 @@ from src.database.models.accounts import UserProfileModel
 from src.schemas.profiles import UserProfileCreate, UserProfileUpdate, UserProfileOut
 from src.config.dependencies import get_async_session, get_current_user
 from src.database.models.accounts import UserModel
+from sqlalchemy import select
 
 router = APIRouter(prefix="/profiles", tags=["profiles"])
 
