@@ -49,10 +49,10 @@ class Settings(BaseAppSettings):
     JWT_SIGNING_ALGORITHM: str = os.getenv("JWT_SIGNING_ALGORITHM", "HS256")
 
     SMTP_HOST: str = os.getenv("SMTP_HOST")
-    SMTP_PORT: int = os.getenv("SMTP_PORT")
+    SMTP_PORT: int = int(os.getenv("SMTP_PORT", 587))
     SMTP_USER: str = os.getenv("SMTP_USER")
     SMTP_PASSWORD: str = os.getenv("SMTP_PASSWORD")
-    SMTP_FROM_EMAIL: EmailStr = os.getenv("SMTP_FROM_EMAIL")
+    SMTP_FROM_EMAIL: str = os.getenv("SMTP_FROM_EMAIL")
 
 
 class TestingSettings(BaseAppSettings):

@@ -65,24 +65,6 @@ async def upload_avatar(
     if not profile:
         raise HTTPException(status_code=404, detail="Profile not found")
 
-    filename = f"avatars/{current_user.id}_{file.filename}"
-
-    profile.avatar = filename
-    session.add(profile)
-    await session.commit()
-    await session.refresh(profile)
-    return profile
-
-@router.post("/me/avatar", response_model=UserProfileOut)
-async def upload_avatar(
-    file: UploadFile = File(...),
-    current_user: UserModel = Depends(get_current_user),
-    session: AsyncSession = Depends(get_async_session),
-):
-    profile = await session.get(UserProfileModel, current_user.profile.id)
-    if not profile:
-        raise HTTPException(status_code=404, detail="Profile not found")
-
     object_name = f"avatars/{current_user.id}_{file.filename}"
     avatar_url = await minio_service.upload_file(file, object_name)
 
